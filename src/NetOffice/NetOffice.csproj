@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <Version>2.0.0-alpha</Version>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Authors>Jozef Izso</Authors>
+    <Copyright>Copyright © 2020 Jozef Izso</Copyright>
+    <Company>NetOffice</Company>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://netoffice.io/</PackageProjectUrl>
+  </PropertyGroup>
+
+</Project>
