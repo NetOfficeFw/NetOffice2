@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "PowerPointAddin": {
+    "PowerPointAddin (x86)": {
       "commandName": "Executable",
       "executablePath": "C:\\Program Files (x86)\\Microsoft Office\\root\\Office16\\POWERPNT.EXE",
       "nativeDebugging": true

@@ -7,7 +7,7 @@
 
   <PropertyGroup>
     <Authors>Jozef Izso</Authors>
-    <Copyright>Copyright © 2020 Jozef Izso</Copyright>
+    <Copyright>Copyright © 2022 Jozef Izso</Copyright>
     <Company>NetOffice</Company>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://netoffice.io/</PackageProjectUrl>
