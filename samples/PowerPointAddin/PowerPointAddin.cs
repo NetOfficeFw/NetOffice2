@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using NetOffice.Office;
+using NetOffice.PowerPoint;
 
 namespace NetOfficeSamples
 {
@@ -19,12 +20,13 @@ namespace NetOfficeSamples
 
             try
             {
-                var unknown = Marshal.GetIUnknownForObject(application);
-                //var dispatch = Marshal.GetIDispatchForObject(application);
+                var ppApp = new Application(application);
+                var appName = ppApp.Name;
+                var caption = ppApp.Caption;
             }
             catch (Exception ex)
             {
-                Trace.TraceError($"Marshal failed. {ex}");
+                Trace.TraceError($"Addin failed. {ex}");
             }
         }
 
