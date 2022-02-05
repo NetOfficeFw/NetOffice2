@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.ComTypes;
+using NetOffice.Runtime;
 
 namespace NetOffice
 {
-    // IID_IDispatch
-    [Guid("00020400-0000-0000-C000-000000000046")]
+    [Guid(IID.IID_IDispatchGuid)]
     public class Dispatcher
     {
         const int S_OK = 0;
         const int LCID_US = 1033;
-        const int IDispatch_Invoke_Offset = 6;
+        const int IDispatch_Invoke_Opnum = 6;
 
         internal delegate int InvokeMethod(IntPtr pDisp, int dispIdMember, ref Guid riid, uint lcid, ushort wFlags, ref DISPPARAMS pDispParams, out object pVarResult, ref EXCEPINFO pExcepInfo, out uint pArgErr);
 
@@ -24,11 +24,11 @@ namespace NetOffice
         protected unsafe T InvokePropertyGet<T>(int dispId)
         {
             var vtPtr = Marshal.ReadIntPtr(this.dispPtr);
-            var invokePtr = Marshal.ReadIntPtr(vtPtr + IDispatch_Invoke_Offset * IntPtr.Size);
+            var invokePtr = Marshal.ReadIntPtr(vtPtr + IDispatch_Invoke_Opnum * IntPtr.Size);
             var invoke = (InvokeMethod)Marshal.GetDelegateForFunctionPointer(invokePtr, typeof(InvokeMethod));
 
+            var riid = IID.IID_NULL;
             var wFlags = INVOKEKIND.INVOKE_PROPERTYGET;
-            var riid = Guid.Empty;
 
             var pDispParams = new DISPPARAMS();
             var pExcepInfo = new EXCEPINFO();

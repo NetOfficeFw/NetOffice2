@@ -1,19 +1,22 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using NetOffice.Runtime;
 
 namespace NetOffice.Office
 {
     /// <summary>
-    /// The well known Extensibility
+    /// IDTExtensibility2 contains methods that act as interface between Microsoft Office applications and the add-in.
+    /// Microsoft Office applications call these methods whenever an event that affects an add-in occurs,
+    /// such as when it is loaded or unloaded.
     /// </summary>
     [ComImport]
-    [Guid("B65AD801-ABAF-11D0-BB8B-00A0C90F2744")]
+    [Guid(IID.IID_IDTExtensibility2Guid)]
     [TypeLibType(TypeLibTypeFlags.FDispatchable | TypeLibTypeFlags.FDual)]
     public interface IDTExtensibility2
     {
         /// <summary>
-        /// Occurs whenever an add-in is loaded into MS-Office
+        /// Occurs whenever an add-in is loaded into Microsoft Office application.
         /// </summary>
         /// <param name="application">A reference to an instance of the office application</param>
         /// <param name="connectMode">An ext_ConnectMode enumeration value that indicates the way the add-in was loaded into MS-Office</param>
@@ -24,7 +27,7 @@ namespace NetOffice.Office
         void OnConnection([MarshalAs(26)][In] object application, [In] ext_ConnectMode connectMode, [MarshalAs(26)][In] object addInInst, [MarshalAs(29, SafeArraySubType = VarEnum.VT_VARIANT)][In] ref Array custom);
 
         /// <summary>
-        /// Occurs whenever an add-in is unloaded from MS Office
+        /// Occurs whenever an add-in is unloaded from Microsoft Office application.
         /// </summary>
         /// <param name="removeMode">An ext_DisconnectMode enumeration value that informs an add-in why it was unloaded.</param>
         /// <param name="custom">An empty array that you can use to pass host-specific data for use after the add-in unloads</param>
@@ -33,7 +36,7 @@ namespace NetOffice.Office
         void OnDisconnection([In] ext_DisconnectMode removeMode, [MarshalAs(29, SafeArraySubType = VarEnum.VT_VARIANT)][In] ref Array custom);
 
         /// <summary>
-        /// Occurs whenever an add-in is loaded or unloaded from MS Office
+        /// Occurs whenever an add-in is loaded or unloaded Microsoft Office.
         /// </summary>
         /// <param name="custom">An empty array that you can use to pass host-specific data for use in the add-in</param>
         [DispId(3)]
@@ -41,7 +44,7 @@ namespace NetOffice.Office
         void OnAddInsUpdate([MarshalAs(29, SafeArraySubType = VarEnum.VT_VARIANT)][In] ref Array custom);
 
         /// <summary>
-        ///  Occurs whenever an add-in, which is set to load when MS Office starts, loads.
+        ///  Occurs whenever an add-in, which is set to load when Microsoft Office application starts, loads.
         /// </summary>
         /// <param name="custom">An empty array that you can use to pass host-specific data for use when the add-in loads</param>
         [DispId(4)]
@@ -49,7 +52,7 @@ namespace NetOffice.Office
         void OnStartupComplete([MarshalAs(29, SafeArraySubType = VarEnum.VT_VARIANT)][In] ref Array custom);
 
         /// <summary>
-        /// Occurs whenever MS Office shuts down while an add-in is running
+        /// Occurs whenever Microsoft Office application shuts down while an add-in is running.
         /// </summary>
         /// <param name="custom">An empty array that you can use to pass host-specific data for use in the add-in</param>
         [DispId(5)]
