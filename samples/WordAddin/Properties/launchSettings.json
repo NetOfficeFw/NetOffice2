@@ -1,0 +1,14 @@
+{
+  "profiles": {
+    "Microsoft Word 32-bit": {
+      "commandName": "Executable",
+      "executablePath": "C:\\Program Files (x86)\\Microsoft Office\\root\\Office16\\WINWORD.EXE",
+      "nativeDebugging": true
+    },
+    "Microsoft Word 64-bit": {
+      "commandName": "Executable",
+      "executablePath": "C:\\Program Files\\Microsoft Office\\root\\Office16\\WINWORD.EXE",
+      "nativeDebugging": true
+    }
+  }
+}
