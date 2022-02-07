@@ -71,7 +71,7 @@ namespace NetOffice
             uint pArgErr = 0;
 
             var varSize = Marshal.SizeOf<Variant>();
-            var varValue = new Variant { vt = VT.VT_BSTR, bstr = Marshal.StringToBSTR(value) };
+            var varValue = new Variant { _vt = VT.VT_BSTR, _bstr = Marshal.StringToBSTR(value) };
 
             IntPtr mem = Marshal.AllocCoTaskMem(varSize);
             Marshal.StructureToPtr(varValue, mem, false);
@@ -82,7 +82,7 @@ namespace NetOffice
             var result = new object();
             int hr = invoke(dispPtr, dispId, ref riid, LCID_US, (ushort)wFlags, ref pDispParams, out result, ref pExcepInfo, out pArgErr);
 
-            Marshal.FreeBSTR(varValue.bstr);
+            Marshal.FreeBSTR(varValue._bstr);
             Marshal.FreeCoTaskMem(mem);
 
             if (hr != S_OK)
