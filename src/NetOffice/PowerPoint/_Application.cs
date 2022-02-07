@@ -19,7 +19,7 @@ namespace NetOffice.PowerPoint
         public string Caption
         {
             get { return this.InvokePropertyGet<string>(2009); }
-            //set { return this.InvokePropertySet<string>(2009, value); }
+            set { this.InvokePropertySet<string>(2009, value); }
         }
     }
 }

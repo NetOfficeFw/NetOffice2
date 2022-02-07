@@ -23,6 +23,8 @@ namespace NetOfficeSamples
                 var ppApp = new Application(application);
                 var appName = ppApp.Name;
                 var caption = ppApp.Caption;
+
+                ppApp.Caption = "Testing...";
             }
             catch (Exception ex)
             {
