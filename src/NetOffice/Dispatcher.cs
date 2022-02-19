@@ -10,8 +10,10 @@ namespace NetOffice
     {
         const int S_OK = 0;
         const int LCID_US = 1033;
+        const int IUnknown_QueryInterface_Opnum = 0;
         const int IDispatch_Invoke_Opnum = 6;
 
+        internal delegate int QueryInterfaceMethod(IntPtr pThis, ref Guid riid, ref IntPtr ppInterface);
         internal delegate int InvokeMethod(IntPtr pDisp, int dispIdMember, ref Guid riid, uint lcid, ushort wFlags, ref DISPPARAMS pDispParams, out object pVarResult, ref EXCEPINFO pExcepInfo, out uint pArgErr);
 
         private IntPtr dispPtr;
@@ -19,6 +21,28 @@ namespace NetOffice
         public Dispatcher(object instance)
         {
             this.dispPtr = Marshal.GetIDispatchForObject(instance);
+        }
+
+        public Dispatcher(IntPtr unknownPtr)
+        {
+            this.dispPtr = GetIDispatchForObject(unknownPtr);
+        }
+
+        private IntPtr GetIDispatchForObject(IntPtr unknownPtr)
+        { 
+            var vtPtr = Marshal.ReadIntPtr(unknownPtr);
+            var invokePtr = Marshal.ReadIntPtr(vtPtr + IUnknown_QueryInterface_Opnum * IntPtr.Size);
+            var invoke = (QueryInterfaceMethod)Marshal.GetDelegateForFunctionPointer(invokePtr, typeof(QueryInterfaceMethod));
+
+            var riid = IID.IID_IDispatch;
+            IntPtr dispPtr = IntPtr.Zero;
+            int hr = invoke(unknownPtr, ref riid, ref dispPtr);
+            if (hr != S_OK)
+            {
+                throw new COMException($"Failed to query for IDispatch interface.", hr);
+            }
+
+            return dispPtr;
         }
 
         protected unsafe T InvokePropertyGet<T>(int dispId)
@@ -34,8 +58,7 @@ namespace NetOffice
             var pExcepInfo = new EXCEPINFO();
             uint pArgErr = 0;
 
-            var result = new object();
-            int hr = invoke(dispPtr, dispId, ref riid, LCID_US, (ushort)wFlags, ref pDispParams, out result, ref pExcepInfo, out pArgErr);
+            int hr = invoke(dispPtr, dispId, ref riid, LCID_US, (ushort)wFlags, ref pDispParams, out var result, ref pExcepInfo, out pArgErr);
 
             if (hr != S_OK)
             {
