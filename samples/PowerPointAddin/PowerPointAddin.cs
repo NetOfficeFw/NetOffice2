@@ -24,7 +24,19 @@ namespace NetOfficeSamples
                 var appName = ppApp.Name;
                 var caption = ppApp.Caption;
 
-                ppApp.Caption = "Testing...";
+                // ppApp.Caption = "Testing...";
+
+                const int PP_CREATOR = 0x50575054;
+                var creatorId = ppApp.Creator;
+
+                if (PP_CREATOR == creatorId)
+                {
+                    Trace.WriteLine("It works!");
+                }
+
+                var height = ppApp.Height;
+                var width = ppApp.Width;
+                var sandbox = ppApp.IsSandboxed;
             }
             catch (Exception ex)
             {

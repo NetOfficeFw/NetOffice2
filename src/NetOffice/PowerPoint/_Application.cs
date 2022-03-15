@@ -27,5 +27,25 @@ namespace NetOffice.PowerPoint
             get { return this.InvokePropertyGet<string>(2009); }
             set { this.InvokePropertySet<string>(2009, value); }
         }
+
+        public int Creator
+        {
+            get { return this.InvokePropertyGet<int>(2017); }
+        }
+
+        public float Height
+        {
+            get { return this.InvokePropertyGet<float>(2028); }
+        }
+
+        public float Width
+        {
+            get { return this.InvokePropertyGet<float>(2027); }
+        }
+
+        public bool IsSandboxed
+        {
+            get { return this.InvokePropertyGet<bool>(2065); }
+        }
     }
 }

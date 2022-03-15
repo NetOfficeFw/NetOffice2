@@ -4,6 +4,11 @@
       "commandName": "Executable",
       "executablePath": "C:\\Program Files (x86)\\Microsoft Office\\root\\Office16\\POWERPNT.EXE",
       "nativeDebugging": true
+    },
+    "PowerPointAddin (x64)": {
+      "commandName": "Executable",
+      "executablePath": "C:\\Program Files\\Microsoft Office\\root\\Office16\\POWERPNT.EXE",
+      "nativeDebugging": true
     }
   }
 }
