@@ -12,6 +12,11 @@ jobs:
   build:
     runs-on: macos-10.15
 
+    env:
+      DOTNET_NOLOGO: 1
+      DOTNET_CLI_TELEMETRY_OPTOUT: 1
+      DOTNET_GENERATE_ASPNET_CERTIFICATE: false
+
     steps:
     - name: checkout
       uses: actions/checkout@v2
