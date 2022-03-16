@@ -1,0 +1,28 @@
+name: build-mac
+
+on:
+  push:
+    branches:
+      - main
+      - dev/*
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: macos-10.15
+
+    steps:
+    - name: checkout
+      uses: actions/checkout@v2
+
+    - name: setup
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 6.0.x
+
+    - name: restore
+      run: dotnet restore src/NetOffice/NetOffice.csproj
+
+    - name: build
+      run: dotnet build --no-restore src/NetOffice/NetOffice.csproj
