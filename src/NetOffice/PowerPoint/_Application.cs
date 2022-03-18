@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
+using NetOffice.Office;
 
 namespace NetOffice.PowerPoint
 {
@@ -46,6 +47,12 @@ namespace NetOffice.PowerPoint
         public bool IsSandboxed
         {
             get { return this.InvokePropertyGet<bool>(2065); }
+        }
+
+        public MsoTriState Visible
+        {
+            get { return this.InvokePropertyGet<MsoTriState>(2030); }
+            set { this.InvokePropertySet(2030, (int)value); }
         }
     }
 }

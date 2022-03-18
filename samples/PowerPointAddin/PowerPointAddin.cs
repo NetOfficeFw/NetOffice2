@@ -24,6 +24,9 @@ namespace NetOfficeSamples
                 var appName = ppApp.Name;
                 var caption = ppApp.Caption;
 
+                var isVisible = ppApp.Visible;
+                ppApp.Visible = MsoTriState.msoTrue;
+
                 // ppApp.Caption = "Testing...";
 
                 const int PP_CREATOR = 0x50575054;

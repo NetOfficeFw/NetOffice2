@@ -115,5 +115,50 @@ namespace NetOffice
                 throw new COMException($"Failed to invoke property set member with dispId={dispId}.", hr);
             }
         }
+
+        protected unsafe void InvokePropertySet(int dispId, int value)
+        {
+            var vtPtr = Marshal.ReadIntPtr(this.dispPtr);
+            var invokePtr = Marshal.ReadIntPtr(vtPtr + IDispatch_Invoke_Opnum * IntPtr.Size);
+            var invoke = (InvokeMethod)Marshal.GetDelegateForFunctionPointer(invokePtr, typeof(InvokeMethod));
+
+            var riid = IID.IID_NULL;
+            var wFlags = INVOKEKIND.INVOKE_PROPERTYPUT;
+
+            // When you use IDispatch::Invoke() with DISPATCH_PROPERTYPUT or DISPATCH_PROPERTYPUTREF,
+            // you have to specially initialize the cNamedArgs and rgdispidNamedArgs elements of your DISPPARAMS structure with the following:
+            // 
+            // DISPID dispidNamed = DISPID_PROPERTYPUT;
+            // dispparams.cNamedArgs = 1;
+            // dispparams.rgdispidNamedArgs = &dispidNamed;
+
+            var dispidNamed = stackalloc int[1] { DISPID.DISPID_PROPERTYPUT };
+
+            var pDispParams = new DISPPARAMS();
+            pDispParams.cNamedArgs = 1;
+            pDispParams.rgdispidNamedArgs = (IntPtr)dispidNamed;
+
+            var pExcepInfo = new EXCEPINFO();
+            uint pArgErr = 0;
+
+            var varSize = Marshal.SizeOf<Variant>();
+            var varValue = new Variant { _vt = VT.VT_I4, _i4 = value };
+
+            IntPtr mem = Marshal.AllocCoTaskMem(varSize);
+            Marshal.StructureToPtr(varValue, mem, false);
+
+            pDispParams.cArgs = 1;
+            pDispParams.rgvarg = mem;
+
+            var result = new object();
+            int hr = invoke(dispPtr, dispId, ref riid, LCID_US, (ushort)wFlags, ref pDispParams, out result, ref pExcepInfo, out pArgErr);
+
+            Marshal.FreeCoTaskMem(mem);
+
+            if (hr != S_OK)
+            {
+                throw new COMException($"Failed to invoke property set member with dispId={dispId}.", hr);
+            }
+        }
     }
 }
