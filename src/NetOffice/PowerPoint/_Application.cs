@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.InteropServices;
+using System.Runtime.Versioning;
 
 namespace NetOffice.PowerPoint
 {
@@ -7,7 +8,12 @@ namespace NetOffice.PowerPoint
     [Guid("91493442-5a91-11cf-8700-00aa0060263b")]
     public class _Application : Dispatcher
     {
+        [SupportedOSPlatform("windows")]
         public _Application(object instance) : base(instance)
+        {
+        }
+
+        public _Application(IntPtr unknownPtr) : base(unknownPtr)
         {
         }
 

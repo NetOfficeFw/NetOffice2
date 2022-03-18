@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.ComTypes;
+using System.Runtime.Versioning;
 using NetOffice.Runtime;
 
 namespace NetOffice
@@ -18,6 +19,7 @@ namespace NetOffice
 
         private IntPtr dispPtr;
 
+        [SupportedOSPlatform("windows")]
         public Dispatcher(object instance)
         {
             this.dispPtr = Marshal.GetIDispatchForObject(instance);
