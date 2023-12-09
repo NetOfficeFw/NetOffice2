@@ -2,10 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0-windows</TargetFramework>
-    <PlatformName>windows</PlatformName>
+    <!-- <PlatformName>windows</PlatformName> -->
     <EnableComHosting>true</EnableComHosting>
-    <Platforms>x86;x64</Platforms>
-    <PlatformTarget>$(Platform)</PlatformTarget>
+    <!-- <Platforms>x86;x64</Platforms>
+    <PlatformTarget>$(Platform)</PlatformTarget> -->
 	  <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
   </PropertyGroup>
 

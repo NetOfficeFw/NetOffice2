@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Runtime.InteropServices;
+using System.Runtime.Versioning;
 
 namespace NetOffice.Office.Core
 {
     public class COMAddInClass : Dispatcher, COMAddIn
     {
+        [SupportedOSPlatform("windows")]
         public COMAddInClass(object instance)
             : base(instance)
         {
