@@ -12,6 +12,7 @@ namespace NetOffice.Runtime
         public const string IID_IDispatchGuid = "00020400-0000-0000-C000-000000000046";
         public const string IID_IDTExtensibility2Guid = "B65AD801-ABAF-11D0-BB8B-00A0C90F2744";
         public const string IID_IRibbonExtensibilityGuid = "000C0396-0000-0000-C000-000000000046";
+        public const string IID_IRibbonUIGuid = "000C03A7-0000-0000-C000-000000000046";
 
         public static readonly Guid IID_NULL = Guid.Empty;
         public static readonly Guid IID_IUnknown = new Guid(IID_IUnknownGuid);
