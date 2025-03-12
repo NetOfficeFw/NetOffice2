@@ -74,7 +74,7 @@ namespace NetOfficeSamples
         {
             var ribbon = /*lang=xml*/"""
                 <?xml version="1.0" encoding="utf-8" ?>
-                <customUI xmlns="http://schemas.microsoft.com/office/2006/01/customui">
+                <customUI xmlns="http://schemas.microsoft.com/office/2006/01/customui" onLoad="CustomUI_OnLoad">
                   <ribbon>
                     <tabs>
                       <!-- extend the Home tab -->
@@ -93,6 +93,12 @@ namespace NetOfficeSamples
                 """;
 
             return ribbon;
+        }
+
+        public void CustomUI_OnLoad(IRibbonUI ribbonUI)
+        {
+            Trace.WriteLine("Received Ribbon interface object.");
+            ribbonUI.ActivateTabMso("TabInsert");
         }
     }
 }
