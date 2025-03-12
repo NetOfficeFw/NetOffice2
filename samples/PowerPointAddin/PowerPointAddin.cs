@@ -10,7 +10,7 @@ namespace NetOfficeSamples
     [ComVisible(true)]
     [Guid("D8494D38-D995-4670-AFF9-9425ED71D657")]
     [ProgId("NetOfficeSamples.PowerPointAddin")]
-    public class PowerPointAddin : IDTExtensibility2
+    public class PowerPointAddin : IDTExtensibility2, IRibbonExtensibility
     {
         public void OnConnection(object application, ext_ConnectMode connectMode, object addInInst, ref Array custom)
         {
@@ -68,6 +68,31 @@ namespace NetOfficeSamples
 
         public void OnBeginShutdown([In, MarshalAs(29, SafeArraySubType = VarEnum.VT_VARIANT)] ref Array custom)
         {
+        }
+
+        public string GetCustomUI(string ribbonId)
+        {
+            var ribbon = /*lang=xml*/"""
+                <?xml version="1.0" encoding="utf-8" ?>
+                <customUI xmlns="http://schemas.microsoft.com/office/2006/01/customui">
+                  <ribbon>
+                    <tabs>
+                      <!-- extend the Home tab -->
+                      <tab idMso="TabHome">
+                        <group id="MyGroupSample" label="Acme Group" insertAfterMso="GroupDrawing">
+                          <button id="btnAction1"
+                                  label="Action"
+                                  size="large"
+                                  imageMso="AppointmentColor5"
+                                  />
+                        </group>
+                      </tab>
+                    </tabs>
+                  </ribbon>
+                </customUI>
+                """;
+
+            return ribbon;
         }
     }
 }
