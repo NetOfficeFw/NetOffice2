@@ -60,7 +60,7 @@ namespace NetOffice
             var pExcepInfo = new EXCEPINFO();
             uint pArgErr = 0;
 
-            int hr = invoke(dispPtr, dispId, ref riid, LCID_US, (ushort)wFlags, ref pDispParams, out var result, ref pExcepInfo, out pArgErr);
+            int hr = invoke(dispPtr, dispId, ref riid, LCID_US, (ushort)wFlags, ref pDispParams, out object result, ref pExcepInfo, out pArgErr);
 
             if (hr != S_OK)
             {

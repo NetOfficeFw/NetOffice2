@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using NetOffice.Office;
+using NetOffice.Office.Core;
 using NetOffice.PowerPoint;
 
 namespace NetOfficeSamples
@@ -20,6 +21,10 @@ namespace NetOfficeSamples
 
             try
             {
+                var addin = new COMAddInClass(addInInst);
+                var description = addin.Description;
+                // var p = addin.Parent;
+
                 var ppApp = new Application(application);
                 var appName = ppApp.Name;
                 var caption = ppApp.Caption;
