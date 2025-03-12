@@ -83,6 +83,7 @@ namespace NetOfficeSamples
                           <button id="btnAction1"
                                   label="Action"
                                   size="large"
+                                  onAction="btnAction1_OnAction"
                                   imageMso="AppointmentColor5"
                                   />
                         </group>
@@ -95,10 +96,21 @@ namespace NetOfficeSamples
             return ribbon;
         }
 
+        private IRibbonUI RibbonUI { get; set; }
+
         public void CustomUI_OnLoad(IRibbonUI ribbonUI)
         {
             Trace.WriteLine("Received Ribbon interface object.");
-            ribbonUI.ActivateTabMso("TabInsert");
+            this.RibbonUI = ribbonUI;
+        }
+
+        public void btnAction1_OnAction(IRibbonControl control)
+        {
+            var id = control.Id;
+            var tag = control.Tag;
+
+            Trace.WriteLine($"Executing action on control '{id}' with tag '{tag}'.");
+            this.RibbonUI?.ActivateTabMso("TabInsert");
         }
     }
 }
